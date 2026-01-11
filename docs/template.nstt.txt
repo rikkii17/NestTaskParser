@@ -1,0 +1,28 @@
+$taskname
+{
+    deadline:yyyy.mm.dd.hh.minmin;
+    importance:1-255;
+    need_time:h.min.ss;
+    worked_time:h.min.ss;
+    memo:"string";
+    <option_word>(型名):内容;
+    $subtask_name
+    {
+       deadline:yyyy.mm.dd.hh.minmin;
+        importance:1-255;
+        need_time:h.min.ss;
+        worked_time:h.min.ss;
+        memo:"string";
+        <option_word>(型名):内容;
+        $subtask_name
+        {
+           deadline:yyyy.mm.dd.hh.minmin;
+            importance:1-255;
+            need_time:h.min.ss,
+            worked_time:h.min.ss;
+            memo:"string";
+            <option_word>(型名):内容;
+             $subtask_name{…}
+         }
+    }
+}
