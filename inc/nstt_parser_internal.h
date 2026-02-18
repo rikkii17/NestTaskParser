@@ -10,3 +10,5 @@
         Nest_task_data *root;   // ツリーの根
         Nest_task_data *current_task; // 現在パース中のタスク
     } nstt_Parser_Context;
+
+#endif
