@@ -2,6 +2,8 @@
 
     #define NSTT_PARSER_CONFIG-COMPONENT_H
 
+    #include"nstt_parser.h"
+
     typedef struct _Date{
         short int year;
         short int month;
