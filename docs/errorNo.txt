@@ -1,0 +1,21 @@
+ * * [ 正数 ] 成功 + 情報通知 (Warning / Info)
+ * 101: NSTT_INFO_FILE_END                - ファイルの終端(EOF)に正常に到達した。
+ * 102: NSTT_WARN_EXTRA_CONTENT           - 解析自体は成功したが、定義外の余計なデータが含まれていた。
+ * * [  0  ] 完全な正常終了
+ * 0: NSTT_SUCCESS_OK                   - エラーなく、すべての処理が正常に完了した。
+ * * [ 負数 ] 致命的なエラー (Critical Errors)
+ * * -1xx: システム・リソース系
+ * -101: NSTT_ERR_FILE_OPEN               - 対象のファイルを開くことができなかった。
+ * -102: NSTT_ERR_MALLOC_FAIL             - メモリの動的確保に失敗した。
+ * * -2xx: 構文（Syntax）解析系
+ * -201: NSTT_ERR_SYNTAX_BRACE_MISMATCH    - 中括弧 {} の対応が合っていない（閉じ忘れ等）。
+ * -202: NSTT_ERR_SYNTAX_INVALID_KEY      - 不正なキーワード形式（$ や < の欠落、記号ミス）。
+ * -203: NSTT_ERR_SYNTAX_MISSING_SEMICOLON - 行末のセミコロン ; が不足している。
+ * -204: NSTT_ERR_SYNTAX_MISSING_COLON     - 定義内のコロン : による区切りが不正。
+ * * -3xx: 値の妥当性（Validation）系
+ * -301: NSTT_ERR_VAL_OUT_OF_RANGE         - 数値が許容範囲外（例：重要度が 1-255 ではない）。
+ * -302: NSTT_ERR_VAL_INVALID_DATE         - 日付の形式が不正（例：存在しない月日）。
+ * -303: NSTT_ERR_VAL_INVALID_TIME         - 時間の形式が不正（例：60分以上の指定）。
+ * * -4xx: 型・オプション系
+ * -401: NSTT_ERR_TYPE_UNKNOWN             - 指定された (型名) が定義されていない。
+ * -402: NSTT_ERR_TYPE_MISMATCH            - 指定した型と、入力されたデータ内容が一致しない。
