@@ -70,7 +70,7 @@ int add_option_data(Nest_task_data *task, const char *word, var content) {
     }
 
     /* •¶Žš—ñ‚ÌI’[l—¶*/
-    strncpy(new_opt->option_word, word, sizeof(new_opt->option_word) - 1);
+    strncpy_s(new_opt->option_word, sizeof(new_opt->option_word), word, _TRUNCATE);
     new_opt->option_word[sizeof(new_opt->option_word) - 1] = '\0';
     
     new_opt->option_content = content;

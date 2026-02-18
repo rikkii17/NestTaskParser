@@ -1,8 +1,9 @@
-#ifndef NSTT_PARSER_CONFIG-COMPONENT_H
+#ifndef NSTT_PARSER_CONFIG_COMPONENT_H
 
-    #define NSTT_PARSER_CONFIG-COMPONENT_H
+    #define NSTT_PARSER_CONFIG_COMPONENT_H
 
-    #include"nstt_parser.h"
+    #include"nstt_parser_config.h"
+    
 
     //データ型識別用のdefine
     #define NSTT_TYPE_NONE   0
