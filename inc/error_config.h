@@ -29,6 +29,6 @@
 
     
     //1000s Unable to identify error
-        #define 1000 NSTT_ERR_UNABLE_ERROR      -1000   //不明なエラー
+        #define NSTT_ERR_UNABLE_ERROR      -1000   //不明なエラー
 
 #endif
