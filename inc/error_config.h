@@ -17,11 +17,13 @@
         #define NSTT_ERR_SYNTAX_INVALID_KEY      -202  // 不正なキーワード（$や<の欠落など）
         #define NSTT_ERR_SYNTAX_MISSING_SEMICOLON -203 // セミコロン忘れ
         #define NSTT_ERR_SYNTAX_MISSING_COLON    -204  // コロン分けが不正
+        
 
     // 300s: Value Validation
-        #define NSTT_ERR_VAL_OUT_OF_RANGE        -301  // 数値が範囲外 (importance等)
+        #define NSTT_ERR_VAL_OUT_OF_RANGE        -301  // 数値が範囲外 
         #define NSTT_ERR_VAL_INVALID_DATE        -302  // 日付形式が不正
         #define NSTT_ERR_VAL_INVALID_TIME        -303  // 時間形式が不正
+        #define NSTT_ERR_INVALID_ARGUMENT        -304  // 引数が不正
 
     // 400s: Types & Options
         #define NSTT_ERR_TYPE_UNKNOWN            -401  // 未知の型指定

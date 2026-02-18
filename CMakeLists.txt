@@ -6,7 +6,10 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # インクルードディレクトリの指定 (incフォルダ)
-include_directories(inc)
+include_directories(
+    NestTaskParser
+    inc
+)
 
 # ソースファイルの取得
 file(GLOB SOURCES "src/*.c")
