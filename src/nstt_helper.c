@@ -146,11 +146,12 @@ int parse_time_string(const char *str, Time *out_time) {
 }
 
 int parse_deadline_string(const char *str, Deadline_time *out_deadline) {
+    //引数エラーの検出
     if (str == NULL || out_deadline == NULL) return NSTT_ERR_VAL_INVALID_DATE;
 
     const char *p = str;
 
-    /* yyyy.mm.dd 部分の解析処理 */
+    //yyyy.mm.dd 部分の解析処理
     if (get_next_val(&p, &out_deadline->deadline_date.year) != 0) return NSTT_ERR_VAL_INVALID_DATE;
     if (get_next_val(&p, &out_deadline->deadline_date.month) != 0) return NSTT_ERR_VAL_INVALID_DATE;
     if (get_next_val(&p, &out_deadline->deadline_date.day) != 0) return NSTT_ERR_VAL_INVALID_DATE;
@@ -161,3 +162,40 @@ int parse_deadline_string(const char *str, Deadline_time *out_deadline) {
 
     return NSTT_SUCCESS_OK;
 }
+
+
+
+int add_child_task(Nest_task_data *parent, Nest_task_data *child) {
+    if (parent == NULL || child == NULL) return NSTT_ERR_INVALID_ARGUMENT;
+
+    child->parent = parent;
+
+    /* まだ子が一人もいない場合 */
+    if (parent->children == NULL) {
+        parent->children = child;
+    } 
+    /* すでに子がいる場合、兄弟リスト(next)の末尾を探す */
+    else {
+        Nest_task_data *p = parent->children;
+        while (p->next != NULL) {
+            p = p->next;
+        }
+        p->next = child;
+        child->prev = p;
+    }
+
+    return NSTT_SUCCESS_OK;
+}
+
+int get_root_task(Nest_task_data *current, Nest_task_data **out_root) {
+    if (current == NULL || out_root == NULL) return NSTT_ERR_INVALID_ARGUMENT; 
+
+    Nest_task_data *p = current;
+    while (p->parent != NULL) {
+        p = p->parent;
+    }
+    *out_root = p;
+
+    return NSTT_SUCCESS_OK;
+}
+

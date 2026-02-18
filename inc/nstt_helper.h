@@ -58,4 +58,21 @@ int parse_deadline_string(const char *str, Deadline_time *out_deadline);
  * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
  */
 
+ //ツリー操作用の関数
+
+int add_child_task(Nest_task_data *parent, Nest_task_data *child);
+
+ /* * 指定したタスクを、親タスクの子リストの末尾に追加する
+ * 引数1: 親となるタスクのポインタ
+ * 引数2: 追加したい子タスクのポインタ
+ * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
+ */
+
+int get_root_task(Nest_task_data *current, Nest_task_data **out_root);
+/* * 指定したタスクの「一番上の親（ルート）」を探して返す
+ * 引数1: 起点となるタスクのポインタ
+ * 引数2: ルートタスクのポインタを格納する変数へのポインタ
+ * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
+ */
+
 #endif
