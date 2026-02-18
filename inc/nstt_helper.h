@@ -6,6 +6,8 @@
 #include "error_config.h"
 //エラーコードの管理ヘッダー
 
+/*変数構造体の生成系*/
+
 int create_nest_task_data(Nest_task_data **out_task);
 /* * 新しいタスク構造体をメモリ確保して初期化する
  * 引数1: 生成された構造体のポインタを格納するためのポインタ
@@ -25,6 +27,35 @@ int add_option_data(Nest_task_data *task, const char *word, var content);
  * 引数2: オプション名（文字列）
  * 引数3: 格納するデータ構造体
  * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード(負数)
+ */
+
+ /*パース系のコード*/
+
+static int get_next_val(const char **str, short int *result);
+/* * 文字列から次の '.' までの数値を読み取り、ポインタを進める内部補助
+ *　引数1: 解析前の文字列
+ *　引数2: 解析の結果得られた整数値
+ * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
+*/
+int parse_date_string(const char *str, Date *out_date);
+/* * 日付文字列(yyyy.mm.dd)をDate構造体に変換する
+ * 引数1: 解析対象の文字列 ("2025.09.02" など)
+ * 引数2: 結果を格納するDate構造体のポインタ
+ * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
+ */
+
+int parse_time_string(const char *str, Time *out_time);
+/* * 時間文字列(h.min.ss)をTime構造体に変換する
+ * 引数1: 解析対象の文字列 ("1.30.00" など)
+ * 引数2: 結果を格納するTime構造体のポインタ
+ * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
+ */
+
+int parse_deadline_string(const char *str, Deadline_time *out_deadline);
+/* * デッドライン文字列(yyyy.mm.dd.hh.minmin)をDeadline_time構造体に変換する
+ * 引数1: 解析対象の文字列 ("2025.09.02.14.30" など)
+ * 引数2: 結果を格納するDeadline_time構造体のポインタ
+ * 戻り値: NSTT_SUCCESS_OK(0) またはエラーコード
  */
 
 #endif

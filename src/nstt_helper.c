@@ -86,3 +86,78 @@ int add_option_data(Nest_task_data *task, const char *word, var content) {
 
     return NSTT_SUCCESS_OK;
 }
+
+
+
+int get_next_val(const char **str, short int *result) {
+    int val = 0;
+    int digit_count = 0;
+
+    while (**str >= '0' && **str <= '9') {
+        val = val * 10 + (**str - '0');
+        (*str)++;
+        digit_count++;
+    }
+
+    if (digit_count == 0) return -1; /* 数値が存在しなかった場合 */
+    *result = (short int)val;
+
+    if (**str == '.') {
+        (*str)++; /* ドットが存在する場合それは無視する*/
+    }
+    return NSTT_SUCCESS_OK;
+}
+
+int parse_date_string(const char *str, Date *out_date) {
+    if (str == NULL || out_date == NULL) return NSTT_ERR_VAL_INVALID_DATE;
+
+    const char *p = str;
+    
+    /* 年・月・日の順にてて解析 */
+    if (get_next_val(&p, &out_date->year) != 0) return NSTT_ERR_VAL_INVALID_DATE;
+    if (get_next_val(&p, &out_date->month) != 0) return NSTT_ERR_VAL_INVALID_DATE;
+    if (get_next_val(&p, &out_date->day) != 0) return NSTT_ERR_VAL_INVALID_DATE;
+
+    /* バリデーションエラーの検出*/
+    if (out_date->month < 1 || out_date->month > 12 || out_date->day < 1 || out_date->day > 31) {
+        return NSTT_ERR_VAL_OUT_OF_RANGE;
+    }
+
+    return NSTT_SUCCESS_OK;
+}
+
+int parse_time_string(const char *str, Time *out_time) {
+    //引数エラーの検出
+    if (str == NULL || out_time == NULL) return NSTT_ERR_VAL_INVALID_TIME;
+
+    const char *p = str;
+
+    /* 時・分・秒の順にて解析 */
+    if (get_next_val(&p, &out_time->hour) != 0) return NSTT_ERR_VAL_INVALID_TIME;
+    if (get_next_val(&p, &out_time->minute) != 0) return NSTT_ERR_VAL_INVALID_TIME;
+    if (get_next_val(&p, &out_time->second) != 0) return NSTT_ERR_VAL_INVALID_TIME;
+
+    /*バリデーションエラーの検出*/
+    if (out_time->minute >= 60 || out_time->second >= 60) {
+        return NSTT_ERR_VAL_OUT_OF_RANGE;
+    }
+
+    return NSTT_SUCCESS_OK;
+}
+
+int parse_deadline_string(const char *str, Deadline_time *out_deadline) {
+    if (str == NULL || out_deadline == NULL) return NSTT_ERR_VAL_INVALID_DATE;
+
+    const char *p = str;
+
+    /* yyyy.mm.dd 部分の解析処理 */
+    if (get_next_val(&p, &out_deadline->deadline_date.year) != 0) return NSTT_ERR_VAL_INVALID_DATE;
+    if (get_next_val(&p, &out_deadline->deadline_date.month) != 0) return NSTT_ERR_VAL_INVALID_DATE;
+    if (get_next_val(&p, &out_deadline->deadline_date.day) != 0) return NSTT_ERR_VAL_INVALID_DATE;
+
+    /* hh.minmin 部分の解析処理 */
+    if (get_next_val(&p, &out_deadline->hour) != 0) return NSTT_ERR_VAL_INVALID_TIME;
+    if (get_next_val(&p, &out_deadline->minute) != 0) return NSTT_ERR_VAL_INVALID_TIME;
+
+    return NSTT_SUCCESS_OK;
+}
