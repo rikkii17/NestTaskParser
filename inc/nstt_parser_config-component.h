@@ -2,7 +2,6 @@
 
     #define NSTT_PARSER_CONFIG_COMPONENT_H
 
-    #include"nstt_parser_config.h"
     
 
     //データ型識別用のdefine
